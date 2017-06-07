@@ -1,3 +1,7 @@
+"""
+View module, that contains all functions that interacts with command line.
+"""
+
 import argparse
 import configparser
 import dateutil.parser
@@ -130,4 +134,3 @@ class View:
     def print_exception(self, text):
         """Highlight exceptions."""
         print("\033[91m{}\033[0m".format(text))
-

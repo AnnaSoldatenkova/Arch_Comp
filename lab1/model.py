@@ -4,10 +4,10 @@ from datetime import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
-backen = importlib.import_module('backends.get_%s' % config['backend']['type'])
+backend = importlib.import_module('backends.get_%s' % config['backend']['type'])
 
 
-class PressureStatistic(object):
+class PressureStatistics(object):
     """
     Class, that provides basic CRUD functionality for arterial pressure info.
     """
@@ -15,21 +15,21 @@ class PressureStatistic(object):
 
     def __init__(self, *args, **kwargs):
         """
-        Initial method, that loads saved pressure statistic from json file.
+        Initial method, that loads saved pressure statistic from file.
         """
-        self.table = backen.get() or {}
+        self.table = backend.get() or {}
 
-    def __del__(self):
+    def save(self):
         """
-        Save pressure statistics to json file on object deletion.
+        Sericalize and save pressure statistics to file on object deletion.
         """
-        backen.set(self.table)
+        backend.set(self.table)
 
     def add(self, pressure_list):
         """
         Add pressure value for today.
         Raises exception, if we already added todays values.
-        >>> ps = PressureStatistic()
+        >>> ps = PressureStatistics()
         >>> tmp = ps.table
         >>> ps.table = {}
         >>> ps.add(['120', '80'])
@@ -53,11 +53,11 @@ class PressureStatistic(object):
         Args:
             date - datetime object. Points, what day we need to update.
             pressure_list - list object (size=2).
-        >>> ps = PressureStatistic()
+        >>> ps = PressureStatistics()
         >>> tmp = ps.table
         >>> ps.table = {}
-        >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
-        >>> ps.table['2017-03-11'] == ['120', '80']
+        >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
+        >>> ps.table['2016-03-11'] == ['120', '80']
         True
         >>> ps.table = tmp
         """
@@ -68,13 +68,13 @@ class PressureStatistic(object):
         Drops record by key.
         Args:
             date - datetime object. Points, what day we need to update.
-        >>> ps = PressureStatistic()
+        >>> ps = PressureStatistics()
         >>> tmp = ps.table
         >>> ps.table = {}
-        >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
+        >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
         >>> len(ps.table) == 1
         True
-        >>> ps.delete(datetime(2017, 3, 11, 0, 0))
+        >>> ps.delete(datetime(2016, 3, 11, 0, 0))
         >>> ps.table
         {}
         >>> ps.table = tmp
@@ -83,3 +83,11 @@ class PressureStatistic(object):
             del self.table[date.isoformat().split("T")[0]]
         except:
             raise Exception("Wrong date.")
+
+    def __str__(self):
+        string = ""
+        for date, pressure in self.table.items():
+            string += "{} - {}, {}\n".format(date, pressure[0], pressure[1])
+        if not self.table:
+            string = "Table is empty."
+        return string

@@ -4,7 +4,7 @@ from datetime import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
-backend = importlib.import_module('backends.get_%s' % config['backend']['type'])
+backen = importlib.import_module('backends.get_%s' % config['backend']['type'])
 
 
 class PressureStatistic(object):
@@ -17,13 +17,13 @@ class PressureStatistic(object):
         """
         Initial method, that loads saved pressure statistic from json file.
         """
-        self.table = backend.get() or {}
+        self.table = backen.get() or {}
 
     def __del__(self):
         """
         Save pressure statistics to json file on object deletion.
         """
-        backend.set(self.table)
+        backen.set(self.table)
 
     def add(self, pressure_list):
         """
@@ -56,8 +56,8 @@ class PressureStatistic(object):
         >>> ps = PressureStatistic()
         >>> tmp = ps.table
         >>> ps.table = {}
-        >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
-        >>> ps.table['2016-03-11'] == ['120', '80']
+        >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
+        >>> ps.table['2017-03-11'] == ['120', '80']
         True
         >>> ps.table = tmp
         """
@@ -71,10 +71,10 @@ class PressureStatistic(object):
         >>> ps = PressureStatistic()
         >>> tmp = ps.table
         >>> ps.table = {}
-        >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
+        >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
         >>> len(ps.table) == 1
         True
-        >>> ps.delete(datetime(2016, 3, 11, 0, 0))
+        >>> ps.delete(datetime(2017, 3, 11, 0, 0))
         >>> ps.table
         {}
         >>> ps.table = tmp

@@ -31,7 +31,7 @@ def get_date_choice():
     """
     Get date from console.
     """
-    return input("Enter date in format: 01.11.2016:")
+    return input("Enter date in format: 01.11.2017:")
 
 
 def print_for_time(pressure_stat, time):
@@ -52,11 +52,11 @@ def print_for_week(pressure_stat):
     >>> ps = PressureStatistic()
     >>> tmp = ps.table
     >>> ps.table = {}
-    >>> ps.update(datetime(2016, 3, 25, 0, 0), ['120', '80'])
-    >>> ps.update(datetime(2016, 2, 11, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 3, 25, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 2, 11, 0, 0), ['120', '80'])
     >>> show_for_week(ps)
     Pressure statistic for last week:
-    2016-03-25 - 120, 80
+    2017-03-25 - 120, 80
     >>> ps.table = tmp
     """
     print("Pressure statistic for last week:")
@@ -69,13 +69,13 @@ def print_for_month(pressure_stat):
     >>> ps = PressureStatistic()
     >>> tmp = ps.table
     >>> ps.table = {}
-    >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
-    >>> ps.update(datetime(2016, 3, 1, 0, 0), ['120', '80'])
-    >>> ps.update(datetime(2016, 2, 1, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 3, 1, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 2, 1, 0, 0), ['120', '80'])
     >>> show_for_month(ps)
     Pressure statistic for last month:
-    2016-03-11 - 120, 80
-    2016-03-01 - 120, 80
+    2017-03-11 - 120, 80
+    2017-03-01 - 120, 80
     >>> ps.table = tmp
     """
     print("Pressure statistic for last month:")
@@ -88,14 +88,14 @@ def print_all(pressure_stat):
     >>> ps = PressureStatistic()
     >>> tmp = ps.table
     >>> ps.table = {}
-    >>> ps.update(datetime(2016, 3, 11, 0, 0), ['120', '80'])
-    >>> ps.update(datetime(2016, 3, 1, 0, 0), ['120', '80'])
-    >>> ps.update(datetime(2016, 2, 1, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 3, 11, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 3, 1, 0, 0), ['120', '80'])
+    >>> ps.update(datetime(2017, 2, 1, 0, 0), ['120', '80'])
     >>> print_all(ps)
     Pressure statistic for all time:
-    2016-03-11 - 120, 80
-    2016-03-01 - 120, 80
-    2016-02-01 - 120, 80
+    2017-03-11 - 120, 80
+    2017-03-01 - 120, 80
+    2017-02-01 - 120, 80
     >>> ps.table = tmp
     """
     print("Pressure statistic for all time:")

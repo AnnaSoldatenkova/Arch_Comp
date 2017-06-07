@@ -86,3 +86,4 @@ ENV/
 lab1_doc/
 *.html
 *.json
+*.pkl

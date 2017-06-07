@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 Module that provides multilanguage support.
 Contains dictionary with languages as keys, and dictionary
@@ -5,6 +6,8 @@ with all responses, written in this language.
 You can change language in config.ini.
 """
 
+=======
+>>>>>>> 7b15bbd138b58080c0660a77d93cd2234a568d92
 lang = {
     "eng": {
         "main_menu_cli_choice": """
